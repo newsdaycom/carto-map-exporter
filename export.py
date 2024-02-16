@@ -24,4 +24,4 @@ if os.environ.get('CARTO_MAP_URL') is None:
 print(f"Generating {MAP_DPI} dpi render in {MAP_IMAGE_TYPE} format for map {MAP_URL}")
 time.sleep(5)
 printer = Printer(CARTO_USER_NAME, MAP_URL, CARTO_API_KEY, MAP_WIDTH_CM, MAP_HEIGHT_CM, MAP_ZOOM, MAP_BBOX, MAP_DPI, MAP_IMAGE_TYPE)
-printer.export('/usr/app/tmp')
+printer.export('/usr/app/output')
