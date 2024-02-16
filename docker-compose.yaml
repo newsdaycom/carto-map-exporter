@@ -1,0 +1,32 @@
+version: "3"
+
+## Search and replace 'carto-map-exporter' with the name of the service
+
+services:
+  carto-map-exporter:
+    container_name: carto-map-exporter
+    hostname: carto-map-exporter
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+      - /usr/app/bin
+    build:
+      context: .
+    environment:
+      - ENV
+      - CARTO_USER_NAME
+      - CARTO_API_KEY
+      - CARTO_MAP_URL
+      - MAP_DPI
+      - MAP_WIDTH_CM
+      - MAP_HEIGHT_CM
+      - MAP_IMAGE_TYPE
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
+networks:
+  default:
+    name: special-projects
+    external: true
