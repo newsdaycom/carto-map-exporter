@@ -13,7 +13,7 @@ TAG="build-$BRANCH-$(date '+%Y%m%d%H%M%S')"
 ## Build the image using the repo name, tag and passing in the env var and build version
 # docker build -t "$REPO_NAME:$TAG" --build-arg ENV=$ENV --build-arg TARGETENV=$ENV --build-arg BUILD_VERSION=$TAG .
 
-docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag "$REPO_NAME:$TAG" "$REPO_NAME:latest" .
+docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag "$REPO_NAME:$TAG" --tag "$REPO_NAME:latest" .
 
 ## wait 10 seconds
 sleep 10
