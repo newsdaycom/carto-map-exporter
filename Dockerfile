@@ -8,12 +8,11 @@ RUN apt-get -y install python3-dev python3-setuptools libtiff5-dev libjpeg62-tur
 # Set the work directory
 WORKDIR /usr/app
 
-# RUN easy_install Pillow
-# RUN pip install carto-print
-
-RUN pip install carto-print
+#RUN pip install carto-print
 
 COPY . .
+
+RUN pip install -r /usr/app/requirements.txt
 
 # Start the service
 CMD ["bash", "./start-service"]

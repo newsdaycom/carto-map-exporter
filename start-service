@@ -1,3 +1,4 @@
 #!/bin/bash
 
+# pip freeze > /usr/app/requirements.txt
 python3 /usr/app/export.py
