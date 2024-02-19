@@ -6,14 +6,21 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd $DIR
 
 ## Set repo name and tag
-REPO_NAME="newsday/carto-to-image"
+REPO_NAME="newsday/carto-for-print"
 BRANCH=`git branch | grep '^*' | sed 's/* //'`
 TAG="build-$BRANCH-$(date '+%Y%m%d%H%M%S')"
 
 ## Build the image using the repo name, tag and passing in the env var and build version
 # docker build -t "$REPO_NAME:$TAG" --build-arg ENV=$ENV --build-arg TARGETENV=$ENV --build-arg BUILD_VERSION=$TAG .
 
+BUILDX_EXISTS=$(docker buildx ls | grep "carto-for-print" | wc -l)
+
+if [ $BUILDX_EXISTS -eq 0 ]; then
+  docker buildx create --name carto-for-print --driver docker-container --use
+fi
+
 docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag "$REPO_NAME:$TAG" --tag "$REPO_NAME:latest" .
+
 
 ## wait 10 seconds
 sleep 10
